@@ -6,18 +6,20 @@
 /*   By: tjaasalo <tjaasalo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:44:56 by tjaasalo          #+#    #+#             */
-/*   Updated: 2023/06/30 05:40:19 by tjaasalo         ###   ########.fr       */
+/*   Updated: 2023/07/01 16:33:09 by tjaasalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fork.h"
 
-static BOOL	is_even(t_philo_id philo_id);
+static BOOL	is_odd(t_philo_id philo_id);
 
 BOOL	fork_lock(t_fork *self, t_philo_id philo_id)
 {
-	(void)pthread_mutex_lock(&self->mutex);
-	if (self->is_taken || (is_even(self->previous_id) && is_even(philo_id)))
+	(void)pthread_mutex_lock(&self->mutex);	
+	if (self->is_taken
+		|| is_odd(self->previous_id & philo_id)
+		|| !is_odd(self->previous_id | philo_id))
 	{
 		(void)pthread_mutex_unlock(&self->mutex);
 		usleep(10);
@@ -52,7 +54,7 @@ void	fork_destroy(t_fork *self)
 	self->is_valid = FALSE;
 }
 
-static BOOL	is_even(t_philo_id philo_id)
+static BOOL	is_odd(t_philo_id philo_id)
 {
-	return (philo_id % 2 == 0);
+	return (philo_id % 2 != 0);
 }
