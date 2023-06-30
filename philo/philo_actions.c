@@ -6,7 +6,7 @@
 /*   By: tjaasalo <tjaasalo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 09:36:47 by tjaasalo          #+#    #+#             */
-/*   Updated: 2023/06/30 09:58:51 by tjaasalo         ###   ########.fr       */
+/*   Updated: 2023/06/30 14:37:50 by tjaasalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ BOOL	philo_eat(t_philo *self)
 	{
 		if (self->config->must_eat_count <= self->times_eaten)
 			return (FALSE);
-	}
+	}     
 	return (TRUE);
 }
 
@@ -95,7 +95,6 @@ BOOL	philo_grab_fork_left(t_philo *self)
 	t_fork				*fork;
 
 	fork = simulation_get_fork(self->simulation, philo_fork_id_left(self));
-	timestamp = timestamp_millis();
 	while (TRUE)
 	{
 		timestamp = timestamp_millis();
