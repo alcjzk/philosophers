@@ -1,0 +1,5 @@
+philosophers
+*.a
+obj/
+*/philo
+.vscode/
