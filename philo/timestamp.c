@@ -6,7 +6,7 @@
 /*   By: tjaasalo <tjaasalo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/25 08:11:50 by tjaasalo          #+#    #+#             */
-/*   Updated: 2023/06/30 10:12:37 by tjaasalo         ###   ########.fr       */
+/*   Updated: 2023/06/30 11:54:02 by tjaasalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,10 @@ void	timestamp_millis_sleep_until(t_timestamp_millis then)
 		return ;
 	duration = ((uint_least64_t)(then - now));
 	if (duration > 10)
+	{
 		duration -= 10;
-	usleep((duration * 1000));
+		usleep((duration * 1000));
+	}
 	now = timestamp_millis();
 	while (now < then)
 		now = timestamp_millis();
