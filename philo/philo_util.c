@@ -6,7 +6,7 @@
 /*   By: tjaasalo <tjaasalo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 09:31:31 by tjaasalo          #+#    #+#             */
-/*   Updated: 2023/06/30 10:10:04 by tjaasalo         ###   ########.fr       */
+/*   Updated: 2023/06/30 11:40:56 by tjaasalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 BOOL	philo_is_alive_at(t_philo *self, t_timestamp_millis timestamp)
 {
-	if (self->last_meal_timestamp + self->config->time_to_die >= timestamp)
+	if (self->last_meal_timestamp + self->config->time_to_die > timestamp)
 		return (TRUE);
 	return (FALSE);
 }
