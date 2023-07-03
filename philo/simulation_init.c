@@ -6,7 +6,7 @@
 /*   By: tjaasalo <tjaasalo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 09:50:34 by tjaasalo          #+#    #+#             */
-/*   Updated: 2023/06/30 09:54:04 by tjaasalo         ###   ########.fr       */
+/*   Updated: 2023/07/03 17:59:58 by tjaasalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,24 @@ BOOL	simulation_init(t_simulation *self, const t_config *config)
 
 static BOOL	simulation_init_forks(t_simulation *self, int count)
 {
+	int	block_id;
+	int	index;
+
 	self->forks = malloc(sizeof(t_fork) * count);
 	if (!self->forks)
 		return (FALSE);
-	while (count-- > 0)
+	index = 0;
+	block_id = 2;
+	while (index < count)
 	{
-		if (!fork_init(&self->forks[count]))
+		if (!fork_init(&self->forks[index]))
 			return (FALSE);
+		self->forks[index].previous_id = block_id;
+		index++;
+		if (index % 2 == 0)
+			block_id += 2;
 	}
+	self->forks[count - 1].previous_id = count;
 	return (TRUE);
 }
 
