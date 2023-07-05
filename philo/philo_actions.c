@@ -6,7 +6,7 @@
 /*   By: tjaasalo <tjaasalo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 09:36:47 by tjaasalo          #+#    #+#             */
-/*   Updated: 2023/06/30 14:37:50 by tjaasalo         ###   ########.fr       */
+/*   Updated: 2023/07/05 12:51:42 by tjaasalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ BOOL	philo_eat(t_philo *self)
 	{
 		if (self->config->must_eat_count <= self->times_eaten)
 			return (FALSE);
-	}     
+	}
 	return (TRUE);
 }
 
@@ -77,7 +77,7 @@ BOOL	philo_grab_fork_right(t_philo *self)
 			philo_update(self, dead, timestamp);
 			return (FALSE);
 		}
-		if (fork_lock(fork, self->id))
+		if (fork_lock(fork, self))
 		{
 			self->fork_right = fork;
 			timestamp = timestamp_millis();
@@ -103,16 +103,14 @@ BOOL	philo_grab_fork_left(t_philo *self)
 			philo_update(self, dead, timestamp);
 			return (FALSE);
 		}
-		if (fork_lock(fork, self->id))
+		if (fork_lock(fork, self))
 		{
 			self->fork_left = fork;
 			timestamp = timestamp_millis();
-			if (!philo_is_alive_at(self, timestamp))
-			{
-				philo_update(self, dead, timestamp);
-				return (FALSE);
-			}
-			return (philo_update(self, grabbed_fork, timestamp));
+			if (philo_is_alive_at(self, timestamp))
+				return (philo_update(self, grabbed_fork, timestamp));
+			philo_update(self, dead, timestamp);
+			return (FALSE);
 		}
 	}
 }

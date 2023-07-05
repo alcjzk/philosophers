@@ -6,7 +6,7 @@
 /*   By: tjaasalo <tjaasalo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:25:04 by tjaasalo          #+#    #+#             */
-/*   Updated: 2023/06/30 05:24:14 by tjaasalo         ###   ########.fr       */
+/*   Updated: 2023/07/05 12:51:26 by tjaasalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include "id.h"
 # include "ft.h"
 
+typedef struct s_philo	t_philo;
+
 typedef struct s_fork
 {
 	t_philo_id		previous_id;
@@ -25,7 +27,7 @@ typedef struct s_fork
 	BOOL			is_valid;
 }	t_fork;
 
-BOOL	fork_lock(t_fork *self, t_philo_id philo_id);
+BOOL	fork_lock(t_fork *self, t_philo *philo);
 void	fork_unlock(t_fork *self);
 BOOL	fork_init(t_fork *self);
 void	fork_destroy(t_fork *self);

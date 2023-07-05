@@ -6,22 +6,29 @@
 /*   By: tjaasalo <tjaasalo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:44:56 by tjaasalo          #+#    #+#             */
-/*   Updated: 2023/07/03 16:37:14 by tjaasalo         ###   ########.fr       */
+/*   Updated: 2023/07/05 12:51:18 by tjaasalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "philo.h"
 #include "fork.h"
 
-BOOL	fork_lock(t_fork *self, t_philo_id philo_id)
+BOOL	fork_lock(t_fork *self, t_philo *philo)
 {
 	(void)pthread_mutex_lock(&self->mutex);
-	if (self->is_taken || self->previous_id == philo_id)
+	if (self->is_taken)
 	{
 		(void)pthread_mutex_unlock(&self->mutex);
-		usleep(10);
+		usleep(100);
 		return (FALSE);
 	}
-	self->previous_id = philo_id;
+	if (self->previous_id == philo->id)
+	{
+		(void)pthread_mutex_unlock(&self->mutex);
+		usleep((philo->config->time_to_eat * 1000) - 50);
+		return (FALSE);
+	}
+	self->previous_id = philo->id;
 	self->is_taken = TRUE;
 	(void)pthread_mutex_unlock(&self->mutex);
 	return (TRUE);
