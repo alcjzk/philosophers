@@ -6,7 +6,7 @@
 /*   By: tjaasalo <tjaasalo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 11:44:56 by tjaasalo          #+#    #+#             */
-/*   Updated: 2023/07/05 12:51:18 by tjaasalo         ###   ########.fr       */
+/*   Updated: 2023/07/12 19:43:19 by tjaasalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ BOOL	fork_lock(t_fork *self, t_philo *philo)
 	if (self->previous_id == philo->id)
 	{
 		(void)pthread_mutex_unlock(&self->mutex);
-		usleep((philo->config->time_to_eat * 1000) - 50);
+		usleep(1000);
 		return (FALSE);
 	}
 	self->previous_id = philo->id;
