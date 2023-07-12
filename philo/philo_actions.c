@@ -6,7 +6,7 @@
 /*   By: tjaasalo <tjaasalo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/30 09:36:47 by tjaasalo          #+#    #+#             */
-/*   Updated: 2023/07/05 12:51:42 by tjaasalo         ###   ########.fr       */
+/*   Updated: 2023/07/12 20:00:57 by tjaasalo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ BOOL	philo_sleep(t_philo *self)
 	if (timestamp_death <= timestamp_awaken)
 	{
 		timestamp_millis_sleep_until(timestamp_death);
-		(void)philo_update(self, dead, timestamp);
+		(void)philo_update(self, dead, timestamp_death);
 		return (FALSE);
 	}
 	timestamp_millis_sleep_until(timestamp_awaken);
